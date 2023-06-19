@@ -1,0 +1,153 @@
+/**
+ * @copyright  Hamid Abbaszadeh 2020 <https://respinar.com/>
+ * @author     Hamid Abbaszadeh (respinar)
+ * @license    GPL-v3
+ */
+
+*[class*="layout-"] #container {
+    display: grid;
+	gap: 0;
+	width: 1200px;
+	margin-inline: auto;	
+}
+
+/* container layout (main, left, right) */
+.layout-1     #container { grid-template-columns: 1fr; }
+.layout-1-1   #container { grid-template-columns: 1fr 1fr; }
+.layout-2-1   #container { grid-template-columns: 2fr 1fr; }
+.layout-3-1   #container { grid-template-columns: 3fr 1fr; }
+.layout-4-1   #container { grid-template-columns: 4fr 1fr; }
+
+.layout-1-1-1 #container { grid-template-columns: 1fr 1fr 1fr; }
+.layout-1-2-1 #container { grid-template-columns: 1fr 2fr 1fr; }
+.layout-1-3-1 #container { grid-template-columns: 1fr 3fr 1fr; }
+.layout-1-4-1 #container { grid-template-columns: 1fr 4fr 1fr; }
+
+
+/* only for .mod_article */
+.fixed-width {
+	display: grid;
+	justify-content: center;
+	grid-template-columns: 1200px;
+}
+
+/* Columns */
+*[class*="col-"] {
+	display: grid;
+	gap: 20px;
+}
+
+.col-1  { grid-template-columns: 1fr; }
+.col-2  { grid-template-columns: 1fr 1fr; }
+.col-3  { grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+.col-4  { grid-template-columns: repeat(4, 1fr); }
+.col-5  { grid-template-columns: repeat(5, 1fr); }
+.col-6  { grid-template-columns: repeat(6, 1fr); gap: 18px; }
+.col-8  { grid-template-columns: repeat(8, 1fr); gap: 16px; }
+.col-9  { grid-template-columns: repeat(9, 1fr); gap: 15px; }
+.col-10 { grid-template-columns: repeat(10, 1fr); }
+.col-12 { grid-template-columns: repeat(12, 1fr); gap: 12px; }
+
+@for $i from 2 through 6 {
+	.col-span-#{$i} {
+		grid-column: span $i;
+	}	
+}
+
+@for $i from 1 through 12 {
+	.col-start-#{$i}  {
+		grid-column-start: $i;
+	}
+}
+
+@for $i from 1 through 12 {
+	.col-end-#{$i}  {
+		grid-column-end: $i;
+	}
+}
+
+@for $i from 2 through 6 {
+	.row-span-#{$i} {
+		grid-row: span $i;
+	}
+}
+
+.wide       { }
+
+/* 980 < 960px < 1200 */
+@media (min-width:980px) and (max-width:1200px) {
+
+	*[class*="layout-"] #container {
+		width: 960px;
+	}
+
+	.fixed-width {
+		grid-template-columns: 960px;
+	}
+
+	.col-9 {
+		gap: 12px;
+	}
+}
+
+/* 768 < 744px < 980 */
+@media (min-width:768px) and (max-width:979px) {
+
+	*[class*="layout-"] #container {
+		width: 744px;
+	}
+
+	.fixed-width  {
+		grid-template-columns: 744px;
+	}
+
+	.col-5  { gap: 16px; }
+	.col-8  { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+	.col-9  { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+	.col-10 { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+	.col-12 { grid-template-columns: repeat(6, 1fr); gap: 18px; }
+
+}
+
+/* Mobile phone - Landscape */
+@media (max-width:767px) and (orientation: landscape) {
+
+	.fixed-width {
+		display: block;
+	}
+
+	.col-5, .col-6, .col-8 {
+		 grid-template-columns: 1fr 1fr 1fr;
+	}
+	
+	.col-9, .col-10, .col-12 {
+		 grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+
+}
+
+/* Mobile phone - Portrait (100%) */
+@media (max-width:767px) {
+
+	*[class*="layout-"] #container { 
+		display: block;
+		width: 100%;
+	}
+
+	.fixed-width {
+		display: block;
+	}
+
+	.col-2, .col-3  {
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	}
+
+	.col-4, .col-5, .col-6, .col-8 {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.col-9, .col-10, .col-12 {
+		 grid-template-columns: 1fr 1fr 1fr;
+	}
+
+}
